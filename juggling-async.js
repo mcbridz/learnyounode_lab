@@ -13,7 +13,7 @@ let storeResults = (arg, result) => {
     else if (arg == 1) { res2 += result }
     else { res3 += result }
 }
-urls.array.forEach((urlToGet, i) => {
+urls.forEach((urlToGet, i) => {
     http.get(urlToGet, (res) => {
         res.setEncoding('utf8')
         res.on('data', (data) => {
