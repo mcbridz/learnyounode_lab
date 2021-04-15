@@ -20,6 +20,13 @@
 // For this exercise we'll be creating a raw TCP server. There's no HTTP
 // involved here so we need to use the net module from Node core which has
 // all the basic networking functions.
+let padInt = (input) => { //call like day = padInt(day)
+    let output
+    if (input < 10) {
+        output = '0' + input.toString()
+    }
+    return output // DANGER, differing data types on return (may require typeof() checks in subsequent code)
+}
 const net = require('net')
 const port = process.argv[2]
 const Server = net.createServer((socket) => {
@@ -35,7 +42,7 @@ const Server = net.createServer((socket) => {
         prettyHours = hours % 12
     } else amPm = 'AM'
 
-    socket.write(`${year}-${(month < 10) ? '0' + month.toString() : month}-${day} ${hours}:${(minutes < 10) ? '0' + minutes.toString() : minutes}\n`)
+    socket.write(`${year}-${(month < 10) ? '0' + month.toString() : month}-${(day < 10) ? '0' + day.toString() : day} ${hours}:${(minutes < 10) ? '0' + minutes.toString() : minutes}\n`)
     socket.end()
 })
 Server.listen(port)
